@@ -1,16 +1,14 @@
 import { Module } from '@nestjs/common'
-import { ConfigModule } from '@nestjs/config'
-import configuration from './config/configuration'
+import { MongooseModule } from '@nestjs/mongoose'
 import { ListModule } from './list/list.module'
-import { UserModule } from './user/user.module'
 
 @Module({
   imports: [
-    UserModule,
+    MongooseModule.forRoot(
+      'mongodb+srv://cloneTnoh:<password>@cluster0.a1inc.mongodb.net/List?retryWrites=true&w=majority',
+      { connectionName: 'ListDb' }
+    ),
     ListModule,
-    ConfigModule.forRoot({
-      load: [configuration],
-    }),
   ],
 })
 export class AppModule {}
