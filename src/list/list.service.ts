@@ -15,8 +15,8 @@ export class ListService {
     return await this.listModel.find().exec()
   }
 
-  async getListOne(id: string): Promise<List> {
-    return await this.listModel.findById(id).exec()
+  async getListOne(ObjectId: string): Promise<List> {
+    return await this.listModel.findById('615bf7f56c2c3585edecc0c1').exec()
   }
 
   async create(createListDto: CreateListDto): Promise<List> {
@@ -26,8 +26,10 @@ export class ListService {
     }).save()
   }
 
-  async update(id: string, updateListDto: UpdateListDto): Promise<List> {
-    return await this.listModel.findByIdAndUpdate(id, updateListDto).exec()
+  async update(ObjectId: string, updateListDto: UpdateListDto): Promise<List> {
+    return await this.listModel
+      .findByIdAndUpdate(ObjectId, updateListDto)
+      .exec()
   }
 
   async delete(id: string): Promise<List> {

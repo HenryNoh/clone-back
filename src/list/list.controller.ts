@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common'
 import { CreateListDto } from './dto/create-list.dto'
 import { UpdateListDto } from './dto/update-list.dto'
 import { ListService } from './list.service'
@@ -12,24 +21,24 @@ export class ListController {
     return await this.listService.getListAll()
   }
 
-  @Get(':id')
-  async getListOne(@Param('id') id: string) {
+  @Get('/:id')
+  async getListOne(@Query('id') id: string) {
+    console.log(id)
     return await this.listService.getListOne(id)
   }
 
   @Post()
   async create(@Body() createListDto: CreateListDto) {
-    console.log(createListDto)
     return await this.listService.create(createListDto)
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateListDto: UpdateListDto) {
+  async update(@Query('id') id: string, @Body() updateListDto: UpdateListDto) {
     return await this.listService.update(id, updateListDto)
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Query('id') id: string) {
     return await this.listService.delete(id)
   }
 }
